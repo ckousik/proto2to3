@@ -115,6 +115,7 @@ mod test {
 
     #[test]
     fn test_decode_empty_buffer() {
-        p2::HopMessage::decode(bytes::Bytes::new()).expect("should decode");
+        let message = p2::HopMessage::decode(bytes::Bytes::new()).expect("should decode");
+        assert_eq!(message.r#type, 0)
     }
 }
