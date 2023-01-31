@@ -37,6 +37,7 @@ mod test {
         let b3 = r3.encode_to_vec();
 
         assert_ne!(b2, b3);
+        assert_eq!(&b3[..], b"");
 
         let b2to3 = p3::HopMessage::decode(bytes::Bytes::from(b2)).expect("should be decodable");
         assert_eq!(b2to3, r3);
@@ -110,5 +111,10 @@ mod test {
         let b3 = r3.encode_to_vec();
         let b3to2 = p2::HopMessage::decode(bytes::Bytes::from(b3)).expect("should be decodable");
         assert_eq!(b3to2.status, Some(0))
+    }
+
+    #[test]
+    fn test_decode_empty_buffer() {
+        p2::HopMessage::decode(bytes::Bytes::new()).expect("should decode");
     }
 }
